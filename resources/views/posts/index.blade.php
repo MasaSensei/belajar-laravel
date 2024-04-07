@@ -27,7 +27,7 @@
         <div>
             @foreach($posts as $post)
             @php(
-            $post = explode(",", $post)
+            $post = explode(',', $post)
             )
             <div class="card mb-3">
                 <div class="card-body">
