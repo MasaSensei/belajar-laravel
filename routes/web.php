@@ -25,4 +25,6 @@ Route::get('/', function () {
 // Route::get('world', [HelloController::class, 'world_message']);
 
 Route::get('posts', [PostController::class, 'index']);
+Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::get('posts/{id}', [PostController::class, 'show'])->name('posts.show');
+Route::post('posts', [PostController::class, 'store'])->name('posts.store');
