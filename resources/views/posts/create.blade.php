@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <h1>Buat Postingan Baru</h1>
-    <form method="post" action="{{route('posts.store')}}" class="form-control">
+    <h1 class="container">Buat Postingan Baru</h1>
+    <form method="post" action="{{route('posts.store')}}" class="form-control container">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
