@@ -56,19 +56,14 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        $posts = Storage::get('posts.txt');
-        $posts = explode("\n", $posts);
-        $selected_post = array();
-        foreach ($posts as $post) {
-            $post = explode(",", $post);
-            if ($post[0] == $id) {
-                $selected_post = $post;
-                break;
-            }
-        }
+        $post = DB::table('posts')
+            ->select('id', 'title', 'content', 'created_at')
+            ->where('id', '=', $id)
+            ->first();
+
 
         $view_data = [
-            'post' => $selected_post
+            'post' => $post
         ];
         return view('posts.show', $view_data);
     }
@@ -78,7 +73,16 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = DB::table('posts')
+            ->select('id', 'title', 'content', 'created_at')
+            ->where('id', '=', $id)
+            ->first();
+
+        $view_data = [
+            'post' => $post
+        ];
+
+        return view('posts.edit', $view_data);
     }
 
     /**
@@ -86,7 +90,18 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $title = $request->input('title');
+        $content = $request->input('content');
+
+        DB::table('posts')
+            ->where('id', $id)
+            ->update([
+                'title' => $title,
+                'content' => $content,
+                'updated_at' => date('Y-m-d H:i:s'),
+            ]);
+
+        return redirect("/posts/$id");
     }
 
     /**
