@@ -42,4 +42,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public $abc;
+
+    public function get_abc()
+    {
+        return $this->abc;
+    }
+
+    public static function return_sesuatu()
+    {
+        echo "ABCDE";
+    }
 }
