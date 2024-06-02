@@ -12,6 +12,20 @@ class Post extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public $fillable = [
+        'title',
+        'content',
+    ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($post) {
+            $post->slug = str_replace(' ', '-', $post->title);
+        });
+    }
+
     public function scopeActive($query)
     {
         return $query->where('active', 1);
